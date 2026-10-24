@@ -15,7 +15,7 @@ services:
       db:
         condition: service_healthy
       postgrest:
-        condition: service_healthy
+        condition: service_started
 
   db:
     image: webstudio-postgres-local:15
@@ -29,6 +29,11 @@ services:
       POSTGRES_DB: ${POSTGRES_DB:-webstudio}
       POSTGRES_USER: ${POSTGRES_USER:-supabase_admin}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 2s
+      timeout: 2s
+      retries: 30
     volumes:
       - genius_webstudio_pg:/var/lib/postgresql/data
 
