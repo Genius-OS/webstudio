@@ -9,6 +9,11 @@ import { authCallbackPath, isBuilder } from "~/shared/router-utils";
 import { getUserById } from "~/shared/db/user.server";
 import env from "~/env/env.server";
 import { builderAuthenticator } from "./builder-auth.server";
+import {
+  ExternalAuthStrategy,
+  createExternalAuthVerify,
+  type ExternalAuthStrategyOptions,
+} from "./auth-strategy/external.server";
 import { staticEnv } from "~/env/env.static.server";
 import type { SessionData } from "./auth.server.utils";
 import { createContext } from "~/shared/context.server";
@@ -127,6 +132,22 @@ if (env.DEV_LOGIN === "true") {
       throw new Error("Secret is incorrect");
     }),
     "dev"
+  );
+}
+
+const externalAuthStrategyOptions: ExternalAuthStrategyOptions = {
+  issuer: env.EXTERNAL_AUTH_ISSUER,
+  audience: env.EXTERNAL_AUTH_AUDIENCE,
+  secret: env.EXTERNAL_AUTH_SECRET,
+};
+
+if (externalAuthStrategyOptions.secret) {
+  authenticator.use(
+    new ExternalAuthStrategy(
+      createExternalAuthVerify(externalAuthStrategyOptions),
+      externalAuthStrategyOptions
+    ),
+    "external"
   );
 }
 

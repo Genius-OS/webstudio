@@ -10,6 +10,11 @@ const environment = z.object({
   GOOGLE_CLIENT_ID: z.string().optional(),
   GOOGLE_CLIENT_SECRET: z.string().optional(),
 
+  // Generic external auth (signed JWT from external issuer / OIDC): no Genius-specific logic
+  EXTERNAL_AUTH_ISSUER: z.string().optional(),
+  EXTERNAL_AUTH_AUDIENCE: z.string().optional(),
+  EXTERNAL_AUTH_SECRET: z.string().optional(),
+
   // Secret session key, context encode
   AUTH_SECRET: z.string().optional(),
 
@@ -92,6 +97,9 @@ const rawEnv = {
   GITHUB_ISSUE_REPORT_PRIVATE_KEY: process.env.GITHUB_ISSUE_REPORT_PRIVATE_KEY,
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+  EXTERNAL_AUTH_ISSUER: process.env.EXTERNAL_AUTH_ISSUER,
+  EXTERNAL_AUTH_AUDIENCE: process.env.EXTERNAL_AUTH_AUDIENCE,
+  EXTERNAL_AUTH_SECRET: process.env.EXTERNAL_AUTH_SECRET,
   AUTH_SECRET: process.env.AUTH_SECRET,
   DEPLOYMENT_ENVIRONMENT: process.env.DEPLOYMENT_ENVIRONMENT,
   DEPLOYMENT_URL: process.env.DEPLOYMENT_URL,
