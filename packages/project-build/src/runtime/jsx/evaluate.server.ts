@@ -50,6 +50,7 @@ export const evaluateJsx = async <Result>({
         createElement,
         Fragment,
         ...globals,
+        crypto: globalThis.crypto,
       },
       {
         timeout: 1000,
