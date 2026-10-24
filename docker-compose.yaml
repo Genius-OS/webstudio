@@ -20,7 +20,7 @@ services:
   db:
     image: webstudio-postgres-local:15
     build:
-      context: ./apps/builder/backend/postgres-local
+      context: ./apps/builder/backend/postgres
       dockerfile: Dockerfile
     restart: unless-stopped
     labels:
