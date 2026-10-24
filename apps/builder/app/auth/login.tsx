@@ -7,7 +7,7 @@ import {
   cssVar,
   webstudioBrand,
 } from "@webstudio-is/design-system";
-import { GithubIcon, GoogleIcon, WebstudioIcon } from "@webstudio-is/icons";
+import { GithubIcon, GoogleIcon } from "@webstudio-is/icons";
 import { Form } from "@remix-run/react";
 import { authPath } from "~/shared/router-utils";
 import { SecretLogin } from "./secret-login";
@@ -49,9 +49,8 @@ export const Login = ({
           backgroundColor: `oklch(from ${cssVar("--background-primary")} l c h / 50%)`,
         }}
       >
-        <WebstudioIcon size={48} />
         <Text variant="brandSectionTitle" as="h1" align="center">
-          Welcome to Webstudio
+          genius.
         </Text>
 
         <TooltipProvider>

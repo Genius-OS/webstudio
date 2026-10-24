@@ -42,16 +42,16 @@ export const meta: MetaFunction<typeof loader> = () => {
   const metas: ReturnType<MetaFunction> = [
     {
       name: "title",
-      content: "Webstudio login",
+      content: "genius. login",
     },
     {
       name: "description",
-      content: "Log in to Webstudio to start creating websites.",
+      content: "Log in to genius. to start creating websites.",
     },
     { name: "robots", content: "index, follow" },
   ];
 
-  metas.push({ title: "Webstudio login" });
+  metas.push({ title: "genius. login" });
 
   return metas;
 };
