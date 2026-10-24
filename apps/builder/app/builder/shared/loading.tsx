@@ -7,7 +7,6 @@ import {
   theme,
   webstudioBrand,
 } from "@webstudio-is/design-system";
-import { WebstudioIcon } from "@webstudio-is/icons";
 import { useInterval } from "~/shared/hook-utils/use-interval";
 
 export const LoadingBackground = ({
@@ -108,7 +107,15 @@ export const Loading = ({ state }: { state: LoadingState }) => {
               transform: "translateX(-50%)",
             }}
           >
-            <WebstudioIcon size={60} />
+            <Box
+              css={{
+                fontSize: 32,
+                fontWeight: 700,
+                color: cssVar("--foreground-primary"),
+              }}
+            >
+              genius.
+            </Box>
           </Box>
           <Progress
             value={fakeProgress}

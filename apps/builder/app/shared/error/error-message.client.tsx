@@ -1,5 +1,4 @@
 import {
-  AccessibleIcon,
   css,
   cssVar,
   Grid,
@@ -8,7 +7,6 @@ import {
   theme,
   webstudioBrand,
 } from "@webstudio-is/design-system";
-import { WebstudioIcon } from "@webstudio-is/icons";
 
 const pageStyle = css({
   position: "fixed",
@@ -59,9 +57,9 @@ export const ErrorMessage = ({
 }) => {
   return (
     <Grid className={pageStyle()} justify={"center"} gap={6}>
-      <AccessibleIcon label="Logo">
-        <WebstudioIcon size="60" />
-      </AccessibleIcon>
+      <Text variant="brandSectionTitle" as="div">
+        genius.
+      </Text>
       <div />
       <div />
       <Text
