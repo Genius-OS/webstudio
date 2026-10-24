@@ -12,4 +12,4 @@ WORKDIR /app/apps/builder
 ENV PORT=5176
 ENV HOST=0.0.0.0
 EXPOSE 5176
-CMD ["bash", "-c", "cd /app/apps/builder && set -a && . ./.env && . ./.env.development && set +a && export PORT=5176 HOST=0.0.0.0 && exec ./node_modules/.bin/remix-serve ./build/server/nodejs-*/index.js"]
+CMD ["bash", "-c", "cd /app/apps/builder && set -a && if [ -f ./.env ]; then . ./.env; fi && if [ -f ./.env.development ]; then . ./.env.development; fi && set +a && export PORT=5176 HOST=0.0.0.0 && exec ./node_modules/.bin/remix-serve ./build/server/nodejs-*/index.js"]
