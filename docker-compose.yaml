@@ -1,0 +1,52 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    labels:
+      - genius.keep=true
+    ports:
+      - "5176:5176"
+    environment:
+      PORT: "5176"
+      HOST: "0.0.0.0"
+    depends_on:
+      db:
+        condition: service_healthy
+      postgrest:
+        condition: service_healthy
+
+  db:
+    image: webstudio-postgres-local:15
+    build:
+      context: ./apps/builder/backend/postgres-local
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    labels:
+      - genius.keep=true
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-webstudio}
+      POSTGRES_USER: ${POSTGRES_USER:-supabase_admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    volumes:
+      - genius_webstudio_pg:/var/lib/postgresql/data
+
+  postgrest:
+    image: postgrest/postgrest:v12.2.12
+    restart: unless-stopped
+    labels:
+      - genius.keep=true
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PGRST_DB_URI: postgres://${POSTGRES_USER:-supabase_admin}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-webstudio}
+      PGRST_DB_SCHEMAS: public
+      PGRST_DB_ANON_ROLE: ${POSTGRES_USER:-supabase_admin}
+      PGRST_SERVER_PORT: 3000
+
+volumes:
+  genius_webstudio_pg:
+    labels:
+      - genius.keep=true
